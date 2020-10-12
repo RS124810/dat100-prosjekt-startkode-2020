@@ -48,8 +48,19 @@ public class ShowProfile extends EasyGraphics {
 		int x = MARGIN,y;
 
 		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
+		
+		setColor (0,0,255);
+		
+		for (int i = 0; i < gpspoints.length; i++) {
+	            y = (int) gpspoints[i].getElevation();
+	            if (y >= 0) {
+	            	 drawLine(x + i, ybase,x + i,ybase- y);
+	            } 
+	                 
+	            
+	        }
+		
+		//throw new UnsupportedOperationException(TODO.method());
 	
 		// TODO - SLUTT
 	}

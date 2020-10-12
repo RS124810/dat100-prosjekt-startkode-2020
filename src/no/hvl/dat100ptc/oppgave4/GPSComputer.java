@@ -201,7 +201,7 @@ public class GPSComputer {
 		System.out.println("==============================================");
 		//throw new UnsupportedOperationException(TODO.method());
 		
-		//Energy         :     744.40 kcal
+		
 		// TODO - SLUTT
 		
 	}
