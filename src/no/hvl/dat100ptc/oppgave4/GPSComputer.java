@@ -50,11 +50,13 @@ public class GPSComputer {
 
 		double elevation = 0;
 		double e;
-		elevation = gpspoints[0].getElevation();
+		
 		// TODO - START
 		for (int i=0;i<gpspoints.length-1; i++) {
 			e= gpspoints[i+1].getElevation() - gpspoints[i].getElevation();
-			elevation +=e;
+			if (e>0) {
+				elevation +=e;
+			}
 		}								
 		//throw new UnsupportedOperationException(TODO.method());
 		return elevation;
@@ -74,9 +76,14 @@ public class GPSComputer {
 
 	public double[] speeds() {
 		
+		double speed [] = new double [getGPSPoints().length-1];
 		// TODO - START		// OPPGAVE - START
+		for (int i = 0; i < gpspoints.length-1; i++) {
+			speed [i] = GPSUtils.speed(gpspoints [i], gpspoints [i+1]);
+		}
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return speed;
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 
@@ -87,8 +94,10 @@ public class GPSComputer {
 		double maxspeed = 0;
 		
 		// TODO - START
+		maxspeed = GPSUtils.findMax(speeds());
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return maxspeed;
+		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 		
@@ -99,8 +108,11 @@ public class GPSComputer {
 		double average = 0;
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		//(3,6 = 60min * 60 sek /1000 for meter)
+		average = totalDistance()/totalTime() *3.6;
+				
+		return average;
+		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 		
@@ -128,8 +140,28 @@ public class GPSComputer {
 		double speedmph = speed * MS;
 
 		// TODO - START
+		if (speedmph <10) {
+			met = 4.0;
+		}
+		if (speedmph >=10 && speedmph<12) {
+			met = 6.0;
+		}
+		if (speedmph >=12 && speedmph<14) {
+			met = 8.0;
+		}
+		if (speedmph >=14 && speedmph<16) {
+			met = 10.0;
+		}
+		if (speedmph >=16 && speedmph<=20) {
+			met = 12.0;
+		}
+		if (speedmph > 20) {
+			met = 16.0;
+		}
 		
-		throw new UnsupportedOperationException(TODO.method());
+		kcal = met*(secs/3600.0)*weight;
+		return kcal;
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 		
@@ -140,9 +172,16 @@ public class GPSComputer {
 		double totalkcal = 0;
 
 		// TODO - START
+		for (int i =0; i<gpspoints.length-1; i++) {
+		totalkcal +=kcal(weight, gpspoints[i+1].getTime()- gpspoints[i].getTime(), 
+				GPSUtils.speed(gpspoints[i], gpspoints[i+1]));
 		
-		throw new UnsupportedOperationException(TODO.method());
-
+		//System.out.println(gpspoints[i].getTime());
+		//System.out.println(GPSUtils.speed(gpspoints[i], gpspoints[i+1]));
+		}
+		return totalkcal;
+		//throw new UnsupportedOperationException(TODO.method());
+		
 		// TODO - SLUTT
 		
 	}
@@ -150,13 +189,19 @@ public class GPSComputer {
 	private static double WEIGHT = 80.0;
 	
 	public void displayStatistics() {
-
-		System.out.println("==============================================");
-
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
 		
+		System.out.println("==============================================");
+		// TODO - START
+		System.out.println("Total Time     :"+GPSUtils.formatTime(totalTime()));
+		System.out.println("Total distance :"+GPSUtils.formatDouble(totalDistance()/1000)+" km");
+		System.out.println("Total elvation :"+GPSUtils.formatDouble(totalElevation())+" m");
+		System.out.println("Max speed      :"+GPSUtils.formatDouble(maxSpeed())+" km/h");
+		System.out.println("Average speed  :"+GPSUtils.formatDouble(averageSpeed())+" km/t");
+		System.out.println("Energy         :"+GPSUtils.formatDouble(totalKcal(WEIGHT))+" kcal");
+		System.out.println("==============================================");
+		//throw new UnsupportedOperationException(TODO.method());
+		
+		//Energy         :     744.40 kcal
 		// TODO - SLUTT
 		
 	}
