@@ -101,7 +101,7 @@ public class ShowRoute extends EasyGraphics {
 				x = MARGIN + (int) ((longitude[i] - minlon)*xstep());
 				y = ybase -(int) ((latitude [i] - minlat)*ystep());
 				moveCircle (b,x,y);	
-				pause (200);
+				pause (50);
 			}
 		
 		// TODO - START
@@ -112,18 +112,35 @@ public class ShowRoute extends EasyGraphics {
 	}
 
 	public void showStatistics() {
-
-		int TEXTDISTANCE = 20;
-
+		
+		double WEIGHT = 80.0;
+		int TEXTDISTANCE = 13;
+		int x = 10;
+		String l = ("==============================================");
+		
 		setColor(0,0,0);
-		setFont("Courier",12);
-				
+		setFont("Courier",10);
+		
+		
+		String Time =("total time     :"+GPSUtils.formatTime(gpscomputer.totalTime()));
+		String Distance=("Total distance :"+GPSUtils.formatDouble(gpscomputer.totalDistance()/1000)+" km");
+		String Elevation=("Total elvation :"+GPSUtils.formatDouble(gpscomputer.totalElevation())+" m");
+		String Maxspeed=("Max speed      :"+GPSUtils.formatDouble(gpscomputer.maxSpeed())+" km/h");
+		String Average=("Average speed  :"+GPSUtils.formatDouble(gpscomputer.averageSpeed())+" km/t");
+		String Energy=("Energy         :"+GPSUtils.formatDouble(gpscomputer.totalKcal(WEIGHT))+" kcal");
 		gpscomputer.displayStatistics(); 
 		
-		String a= "Hjelp!";
+		
 		
 		// TODO - START
-		drawString (a,TEXTDISTANCE,50);  
+		drawString (l,x,TEXTDISTANCE);
+		drawString (Time,x,2*TEXTDISTANCE);  
+		drawString (Distance,x,3*TEXTDISTANCE);
+		drawString (Elevation,x,4*TEXTDISTANCE);
+		drawString (Maxspeed,x,5*TEXTDISTANCE);
+		drawString (Average,x,6*TEXTDISTANCE);
+		drawString (Energy,x,7*TEXTDISTANCE);
+		drawString (l,x,8*TEXTDISTANCE);
 		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT;
