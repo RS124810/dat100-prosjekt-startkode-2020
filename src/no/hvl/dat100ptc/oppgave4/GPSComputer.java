@@ -142,6 +142,7 @@ public class GPSComputer {
 		// TODO - START
 		if (speedmph <10) {
 			met = 4.0;
+		// if... else if...else if... else.. bedre så programmet blir raskere.
 		}
 		if (speedmph >=10 && speedmph<12) {
 			met = 6.0;

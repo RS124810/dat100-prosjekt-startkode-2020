@@ -83,24 +83,25 @@ public class ShowRoute extends EasyGraphics {
 			x = MARGIN + (int) ((longitude[i] - minlon)*xstep());
 			y = ybase -(int) ((latitude [i] - minlat)*ystep());
 			fillCircle (x,y,2);
-			// Tull og lek under her
+			
 			X = MARGIN + (int) ((longitude [i+1]- minlon)*xstep());
 			Y = ybase -(int) ((latitude [i+1] - minlat)*ystep());
 			drawLine (X,Y,x,y);
 			
 			}
-		
+			//Test under her for litt an
 			setColor(0,0,255);
 		
-		    //int b = fillCircle ((int)((longitude[2]- minlon)*xstep()),(int) ((latitude [2] - minlat)*ystep()),4);
+		    //int b = fillCircle ((int)((longitude[0]- minlon)*xstep()),(int) ((latitude [0] - minlat)*ystep()),4);
 			int b = fillCircle (58,115,4);
 		
 			setSpeed(1);
 			
-		    for (int i=0;i<gpspoints.length-1;i++) {
+		    for (int i=0;i<gpspoints.length;i++) {
 				x = MARGIN + (int) ((longitude[i] - minlon)*xstep());
 				y = ybase -(int) ((latitude [i] - minlat)*ystep());
-				moveCircle (b,x,y);								
+				moveCircle (b,x,y);	
+				pause (200);
 			}
 		
 		// TODO - START
