@@ -142,24 +142,24 @@ public class GPSComputer {
 		// TODO - START
 		if (speedmph <10) {
 			met = 4.0;
-		// if... else if...else if... else.. bedre så programmet blir raskere.
+		// if... else if...else if... else..enn bare "if,if,if" bedre så programmet blir raskere.
 		}
-		if (speedmph >=10 && speedmph<12) {
+		else if (speedmph >=10 && speedmph<12) {
 			met = 6.0;
 		}
-		if (speedmph >=12 && speedmph<14) {
+		else if (speedmph >=12 && speedmph<14) {
 			met = 8.0;
 		}
-		if (speedmph >=14 && speedmph<16) {
+		else if (speedmph >=14 && speedmph<16) {
 			met = 10.0;
 		}
-		if (speedmph >=16 && speedmph<=20) {
+		else if (speedmph >=16 && speedmph<=20) {
 			met = 12.0;
 		}
-		if (speedmph > 20) {
+		else {  // (speedmph > 20)
 			met = 16.0;
 		}
-		
+	
 		kcal = met*(secs/3600.0)*weight;
 		return kcal;
 		//throw new UnsupportedOperationException(TODO.method());

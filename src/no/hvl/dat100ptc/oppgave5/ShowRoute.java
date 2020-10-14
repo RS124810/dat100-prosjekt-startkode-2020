@@ -12,8 +12,9 @@ public class ShowRoute extends EasyGraphics {
 
 	private static int MARGIN = 50;		
 	private static int MAPXSIZE = 800;
-	private static int MAPYSIZE = 800/2;	//kvifor taklar ikke vinduet mitt 800x800
-
+	private static int MAPYSIZE = 500;	//kvifor taklar ikke vinduet mitt 800x800? Vi har valgt å skalere ned y aksen til 600 
+										//elles mister vi bunnen av bildet, selv ved om skjerm har oppløsning 1920X1080
+	
 	private GPSPoint[] gpspoints;
 	private GPSComputer gpscomputer;
 	
@@ -69,37 +70,34 @@ public class ShowRoute extends EasyGraphics {
 		
 		double [] latitude = GPSUtils.getLatitudes(gpspoints);
 		double [] longitude = GPSUtils.getLongitudes(gpspoints);
-		double minlon = GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
-		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
-		
+				
 		setColor (0,255,0);
 		int x,y,X,Y;
-		
-		
-		
-		
+				
 		for (int i=0; i<gpspoints.length-1;i++) {
 			
-			x = MARGIN + (int) ((longitude[i] - minlon)*xstep());
-			y = ybase -(int) ((latitude [i] - minlat)*ystep());
+			x = MARGIN + (int) ((longitude[i] - GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints)))*xstep());
+			y = ybase -(int) ((latitude [i] - GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints)))*ystep());
 			fillCircle (x,y,2);
 			
-			X = MARGIN + (int) ((longitude [i+1]- minlon)*xstep());
-			Y = ybase -(int) ((latitude [i+1] - minlat)*ystep());
+			X = MARGIN + (int) ((longitude [i+1]- GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints)))*xstep());
+			Y = ybase -(int) ((latitude [i+1] - GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints)))*ystep());
 			drawLine (X,Y,x,y);
 			
 			}
-			//Test under her for litt an
+			//Under her har vi lagt til litt animasjon for å gjøre fremføringen av oppgave 5 litt mer interesang.
+			
 			setColor(0,0,255);
 		
 		    //int b = fillCircle ((int)((longitude[0]- minlon)*xstep()),(int) ((latitude [0] - minlat)*ystep()),4);
+			
 			int b = fillCircle (58,115,4);
 		
-			setSpeed(1);
+			//setSpeed(1);
 			
 		    for (int i=0;i<gpspoints.length;i++) {
-				x = MARGIN + (int) ((longitude[i] - minlon)*xstep());
-				y = ybase -(int) ((latitude [i] - minlat)*ystep());
+				x = MARGIN + (int) ((longitude[i] - GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints)))*xstep());
+				y = ybase -(int) ((latitude [i] - GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints)))*ystep());
 				moveCircle (b,x,y);	
 				pause (50);
 			}
@@ -119,8 +117,8 @@ public class ShowRoute extends EasyGraphics {
 		String l = ("==============================================");
 		
 		setColor(0,0,0);
-		setFont("Courier",10);
-		
+		setFont("Courier",10);//Font size 12 skaper en ukjent feil for oss som fjerner siste string td. Total time blir 00:36:3
+							  //Så vi endret fra 12 til 10, og da fungerer progammet igjen.
 		
 		String Time =("total time     :"+GPSUtils.formatTime(gpscomputer.totalTime()));
 		String Distance=("Total distance :"+GPSUtils.formatDouble(gpscomputer.totalDistance()/1000)+" km");
@@ -128,7 +126,8 @@ public class ShowRoute extends EasyGraphics {
 		String Maxspeed=("Max speed      :"+GPSUtils.formatDouble(gpscomputer.maxSpeed())+" km/h");
 		String Average=("Average speed  :"+GPSUtils.formatDouble(gpscomputer.averageSpeed())+" km/t");
 		String Energy=("Energy         :"+GPSUtils.formatDouble(gpscomputer.totalKcal(WEIGHT))+" kcal");
-		gpscomputer.displayStatistics(); 
+		
+		//brukt til console sammenligning test gpscomputer.displayStatistics(); 
 		
 		
 		
@@ -144,6 +143,8 @@ public class ShowRoute extends EasyGraphics {
 		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT;
+		
+		//Vi har desverre ikke tid
 	}
 
 }

@@ -1,7 +1,7 @@
 package no.hvl.dat100ptc.oppgave3;
 
 import static java.lang.Math.*;
-import java.util.Locale;
+import java.util.Locale; // vi treng denne til deloppgaven "String formatDouble(double d)" for vår løsning
 import no.hvl.dat100ptc.TODO;
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
 
@@ -148,7 +148,9 @@ public class GPSUtils {
     
 	public static String formatDouble(double d) {
 		
-		String str = String.format(Locale.US,"%"+TEXTWIDTH+".2f",d);
+		String str = String.format(Locale.US,"%"+TEXTWIDTH+".2f",d); 
+		
+		//Her måtte vi bruke Local.US for å unnå en "."til "," format feil grunnet norsk tastatur
 				
 		return str;
 		// TODO - SLUTT
