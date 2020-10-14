@@ -12,8 +12,8 @@ public class ShowRoute extends EasyGraphics {
 
 	private static int MARGIN = 50;		
 	private static int MAPXSIZE = 800;
-	private static int MAPYSIZE = 500;	//kvifor taklar ikke vinduet mitt 800x800? Vi har valgt å skalere ned y aksen til 600 
-										//elles mister vi bunnen av bildet, selv ved om skjerm har oppløsning 1920X1080
+	private static int MAPYSIZE = 500;	//kvifor taklar ikke vinduet mitt 800x800?
+	//Vi har valgt å skalere ned y aksen til 500 elles mister vi bunnen av bildet, selv ved om skjerm har oppløsning 1920X1080.
 	
 	private GPSPoint[] gpspoints;
 	private GPSComputer gpscomputer;
@@ -99,7 +99,7 @@ public class ShowRoute extends EasyGraphics {
 				x = MARGIN + (int) ((longitude[i] - GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints)))*xstep());
 				y = ybase -(int) ((latitude [i] - GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints)))*ystep());
 				moveCircle (b,x,y);	
-				pause (50);
+				pause (100);
 			}
 		
 		// TODO - START
