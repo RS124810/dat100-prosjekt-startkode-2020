@@ -144,7 +144,7 @@ public class ShowRoute extends EasyGraphics {
 		
 		// TODO - SLUTT;
 		
-		//Vi har desverre ikke tid
+		//Vi har desverre ikke tid å fullføre valgfri oppgave 6, men vi har animert oppgave 5 litt da :)
 	}
 
 }
